@@ -24,7 +24,7 @@ export default function StripePayment({ customerData }) {
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
-  }, []);
+  }, [customerData]);
 
   const appearance = {
     theme: "stripe",
