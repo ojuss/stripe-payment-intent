@@ -19,8 +19,8 @@ func main() {
 	http.HandleFunc("/health", handleHealth)
 
 	// Main method that listens to the port and serves the requests
-	log.Println("Listening to the port localhost:3000")
-	var err error = http.ListenAndServe("localhost:3000", nil)
+	log.Println("Listening to the port localhost:4242")
+	var err error = http.ListenAndServe("localhost:4242", nil)
 
 	if err != nil {
 		log.Fatal(err)
