@@ -16,18 +16,27 @@ import (
 
 func main() {
 	godotenv.Load()
+
+	// Set Stripe API key
 	stripe.Key = os.Getenv("STRIPE_KEY")
-	// HandleFunc is a method that registers the handler function for the given pattern in the DefaultServeMux
+
+	// Register handlers
 	http.HandleFunc("/create-payment-intent", handleCreatePaymentIntent)
 	http.HandleFunc("/health", handleHealth)
 
-	// Main method that listens to the port and serves the requests
-	log.Println("Listening to the port :4242")
-	var err error = http.ListenAndServe(":4242", nil)
+	// Get the port from the environment variable (Render provides this)
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "4242" // Default port for local development
+	}
 
+	// Start the server
+	log.Printf("Listening on port :%s\n", port)
+	err := http.ListenAndServe(":"+port, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
+
 }
 
 func handleCreatePaymentIntent(writer http.ResponseWriter, request *http.Request) {
