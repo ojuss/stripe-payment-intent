@@ -7,20 +7,23 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 
+	"github.com/joho/godotenv"
 	"github.com/stripe/stripe-go/v81"
 	"github.com/stripe/stripe-go/v81/paymentintent"
 )
 
 func main() {
-	stripe.Key = "sk_test_51Qa9qeKHIqsSbSOGqIP19xxnLAXdIDutLXIOBwrfUUkYzFPU8kMXrE3P3S4z8MYnJfRt0MILWyHboVKhCRqDZ67T00pPK2cnXL"
+	godotenv.Load()
+	stripe.Key = os.Getenv("STRIPE_KEY")
 	// HandleFunc is a method that registers the handler function for the given pattern in the DefaultServeMux
 	http.HandleFunc("/create-payment-intent", handleCreatePaymentIntent)
 	http.HandleFunc("/health", handleHealth)
 
 	// Main method that listens to the port and serves the requests
-	log.Println("Listening to the port localhost:4242")
-	var err error = http.ListenAndServe("localhost:4242", nil)
+	log.Println("Listening to the port :4242")
+	var err error = http.ListenAndServe(":4242", nil)
 
 	if err != nil {
 		log.Fatal(err)
