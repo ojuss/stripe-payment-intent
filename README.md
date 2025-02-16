@@ -58,6 +58,3 @@ The frontend client app will start on port 3000. Go to [http://localhost:3000/pr
 
 If you would like to contribute to this project, please fork the repository and submit a pull request. I welcome all contributions, including bug fixes, new features, and documentation improvements.
 
-### License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
